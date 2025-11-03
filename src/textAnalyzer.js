@@ -11,6 +11,7 @@ function longestWord(string) {
     let words = string.split(' ');
     let longestwordIndex = 0;
     for (let i = 0; i < words.length; i++) {
+        words[i] = words[i].trim(); // Remove whitespacing from current word
         if (words[i].length > words[longestwordIndex].length) { // Search through the array to find the longest word, then keep record of it's index number.'
             longestwordIndex = i;
         }
