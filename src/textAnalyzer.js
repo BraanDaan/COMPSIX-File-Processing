@@ -1,16 +1,36 @@
 const fs = require('fs');
 
-
-
-function wordCount(fileContents) {
-    let words = 0;
-    return;
+function wordCount(string) {
+    string = string.replaceAll("\n"," "); // Remove line breaks
+    let words = string.split(' ');
+    return words.length;
 }
 
-const quotesContent = fs.readFileSync('./data/quotes.txt');
+function longestWord(string) {
+    string = string.replaceAll("\n"," ").replaceAll(".","").replaceAll(",",""); // Remove line breaks and all punctuations
+    let words = string.split(' ');
+    let longestwordIndex = 0;
+    for (let i = 0; i < words.length; i++) {
+        if (words[i].length > words[longestwordIndex].length) { // Search through the array to find the longest word, then keep record of it's index number.'
+            longestwordIndex = i;
+        }
+    }
+    return words[longestwordIndex];
+}
 
-// Count total number of words
-// Find the Longest word
-// Count how many lines the file has
+function lineCount(string) {
+    let lines = string.split('\n');
+    return lines.length;
+}
 
-console.log("")
+const quotesContent = fs.readFileSync('./data/quotes.txt', 'utf8');
+const sampleContent = fs.readFileSync('./data/sample-text.txt', 'utf8')
+
+console.log(wordCount(quotesContent)); // Expected output: 108
+console.log(wordCount(sampleContent)); // Expected output: 207
+
+console.log(longestWord(quotesContent)); // Expected output: "sophistication"
+console.log(longestWord(sampleContent)); // Expected output: "infrastructure"
+
+console.log(lineCount(quotesContent)); // Expected output: 10
+console.log(lineCount(sampleContent)); // Expected output: 1
