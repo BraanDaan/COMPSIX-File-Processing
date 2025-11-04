@@ -1,13 +1,19 @@
 const fs = require('fs');
 
 function wordCount(string) {
-    string = string.replaceAll("\n"," "); // Remove line breaks
+    string = string.trim().replaceAll("\n"," "); // Remove whitespace and line breaks
+    if (string.length === 0) { // Return 0 for specific edge case
+        return 0;
+    }
     let words = string.split(' ');
     return words.length;
 }
 
 function longestWord(string) {
     string = string.replaceAll("\n"," ").replaceAll(".","").replaceAll(",",""); // Remove line breaks and all punctuations
+    if (string.length === 0) { // Return null for specific edge case
+        return null;
+    }
     let words = string.split(' ');
     let longestwordIndex = 0;
     for (let i = 0; i < words.length; i++) {
@@ -35,3 +41,5 @@ console.log(longestWord(sampleContent)); // Expected output: "infrastructure"
 
 console.log(lineCount(quotesContent)); // Expected output: 10
 console.log(lineCount(sampleContent)); // Expected output: 1
+
+module.exports = { wordCount, longestWord, lineCount};
